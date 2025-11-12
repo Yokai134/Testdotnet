@@ -6,16 +6,16 @@
 <PageTitle>Login</PageTitle>
 
 <style>
-  
     body {
         margin: 0 !important;
         padding: 0 !important;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        min-height: 100vh !important;
+        height: 100vh !important;
         overflow: hidden !important;
     }
 
     html {
+        height: 100% !important;
         overflow: hidden !important;
     }
 
@@ -23,9 +23,13 @@
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         height: 100vh !important;
         margin: 0 !important;
-        padding: 0 !important;
-        width: 100vw !important;
+        padding: 20px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important; /* Центрируем по вертикали */
+        justify-content: center !important; /* Центрируем по горизонтали */
         overflow: hidden !important;
+        box-sizing: border-box !important;
     }
 
     .glass-card {
@@ -33,7 +37,13 @@
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 20px;
-        max-height: 95vh;
+        width: 100%;
+        max-width: 400px;
+        min-width: 280px;
+        height: auto !important;
+        max-height: none !important;
+        min-height: auto !important;
+        overflow: visible !important;
     }
 
     .form-label {
@@ -46,8 +56,10 @@
         border: 1px solid #e1e5e9;
         background: #f8f9fa;
         border-radius: 12px;
-        padding: 12px 16px 12px 16px;
+        padding: 12px 16px;
         transition: all 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
     }
 
         .modern-input:focus {
@@ -69,6 +81,7 @@
         font-weight: 600;
         transition: all 0.3s ease;
         outline: none !important;
+        width: 100%;
     }
 
         .gradient-btn:hover {
@@ -80,7 +93,6 @@
             outline: none !important;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
         }
-
 
     .error-message {
         color: #dc3545;
@@ -133,22 +145,240 @@
         }
     }
 
-    .container-fluid {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        overflow: hidden !important;
+    /* Стили для кнопки показа пароля */
+    .password-toggle-btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        z-index: 10;
+    }
+
+        .password-toggle-btn:hover {
+            background: #f8f9fa;
+            color: #764ba2;
+        }
+
+    .password-input-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .password-input {
+        padding-right: 50px !important;
+        width: 100%;
+    }
+
+    .password-toggle-btn i {
+        font-size: 1.2rem;
+    }
+
+    /* ИСПРАВЛЕНИЕ ДЛЯ ГОРИЗОНТАЛЬНОЙ ОРИЕНТАЦИИ */
+    @@media (max-height: 600px) and (orientation: landscape) {
+        .gradient-bg {
+            padding: 10px !important;
+            align-items: center !important; /* ВОЗВРАЩАЕМ ЦЕНТРИРОВАНИЕ */
+            justify-content: center !important; /* ВОЗВРАЩАЕМ ЦЕНТРИРОВАНИЕ */
+        }
+
+        .glass-card {
+            margin: 0 !important; /* Убираем отступы */
+            padding: 15px !important;
+            transform: scale(0.9); /* Немного уменьшаем для красоты */
+            transform-origin: center; /* Масштабируем от центра */
+        }
+    }
+
+    /* Для экстремально низких экранов в ландшафте */
+    @@media (max-height: 400px) and (orientation: landscape) {
+        .gradient-bg {
+            padding: 5px !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .glass-card {
+            padding: 10px !important;
+            border-radius: 12px;
+            transform: scale(0.8); /* Еще меньше для очень низких экранов */
+            transform-origin: center;
+        }
+
+        h2 {
+            font-size: 1rem !important;
+            margin-bottom: 0.1rem !important;
+        }
+
+        p.text-muted {
+            display: none !important;
+        }
+
+        .mb-3, .mb-4 {
+            margin-bottom: 0.3rem !important;
+        }
+
+        .modern-input {
+            padding: 6px 10px !important;
+            font-size: 13px !important;
+        }
+
+        .gradient-btn {
+            padding: 8px !important;
+            font-size: 0.8rem !important;
+        }
+
+        .form-label {
+            margin-bottom: 2px !important;
+            font-size: 0.8rem !important;
+        }
+
+        .error-message {
+            font-size: 0.7rem !important;
+            margin-top: 0.1rem !important;
+        }
+    }
+
+    @@media (max-height: 600px) and (orientation: portrait) {
+        .gradient-bg {
+            padding: 10px !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .glass-card {
+            margin: 0 !important;
+            padding: 15px !important;
+            transform: scale(0.9);
+            transform-origin: center;
+        }
+    
+        .password-toggle-btn {
+            right: 8px !important; 
+            padding: 6px !important;
+        }
+
+            .password-toggle-btn i {
+                font-size: 1rem !important; 
+            }
+
+        .password-input {
+            padding-right: 40px !important; 
+        }
+
+        .gradient-btn {
+            padding: 10px !important;
+            font-size: 0.9rem !important;
+        }
+
+        .form-label {
+            margin-bottom: 4px !important;
+            font-size: 0.9rem !important;
+        }
+
+        h2 {
+            font-size: 1.3rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        p.text-muted {
+            font-size: 0.8rem !important;
+            margin-bottom: 0 !important;
+        }
+
+        .mb-3, .mb-4 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .modern-input {
+            padding: 8px 12px !important;
+            font-size: 14px !important;
+        }
+
+        .gradient-btn {
+            padding: 10px !important;
+            font-size: 0.9rem !important;
+        }
+
+        .form-label {
+            margin-bottom: 4px !important;
+            font-size: 0.9rem !important;
+        }
+    }
+
+
+    @@media (max-height: 400px) and (orientation: landscape) {
+        .gradient-bg {
+            padding: 5px !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .glass-card {
+            padding: 10px !important;
+            border-radius: 12px;
+            transform: scale(0.8);
+            transform-origin: center;
+        }
+ 
+        .password-toggle-btn {
+            right: 6px !important;
+            padding: 4px !important;
+        }
+
+            .password-toggle-btn i {
+                font-size: 0.9rem !important;
+            }
+
+        .password-input {
+            padding-right: 35px !important;
+        }
+
+        h2 {
+            font-size: 1rem !important;
+            margin-bottom: 0.1rem !important;
+        }
+
+        p.text-muted {
+            display: none !important;
+        }
+
+        .mb-3, .mb-4 {
+            margin-bottom: 0.3rem !important;
+        }
+
+        .modern-input {
+            padding: 6px 10px !important;
+            font-size: 13px !important;
+        }
+
+        .gradient-btn {
+            padding: 8px !important;
+            font-size: 0.8rem !important;
+        }
+
+        .form-label {
+            margin-bottom: 2px !important;
+            font-size: 0.8rem !important;
+        }
+
+        .error-message {
+            font-size: 0.7rem !important;
+            margin-top: 0.1rem !important;
+        }
     }
 </style>
 
-<div class="gradient-bg d-flex align-items-center justify-content-center">
-    <div class="glass-card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+<div class="gradient-bg">
+    <div class="glass-card shadow-lg p-4">
         <div class="text-center mb-4">
-            <div class="mb-3">
-                <i class="bi bi-person-circle display-4 text-primary"></i>
-            </div>
-            <h2 class="fw-bold text-dark">Welcome Back</h2>
+            <h2 class="fw-bold text-dark mb-2">Welcome Back</h2>
             <p class="text-muted">Sign in to your account</p>
         </div>
 
@@ -169,11 +399,19 @@
 
         <div class="mb-4">
             <label class="form-label fw-bold text-dark">Password</label>
-            <input value="@loginModel.Password"
-                   @oninput="OnPasswordInput"
-                   type="password"
-                   class="form-control modern-input @(passwordError ? "input-error" : "")"
-                   placeholder="Enter your password" />
+            <div class="password-input-container">
+                <input value="@loginModel.Password"
+                       @oninput="OnPasswordInput"
+                       type="@(showPassword ? "text" : "password")"
+                       class="form-control modern-input password-input @(passwordError ? "input-error" : "")"
+                       placeholder="Enter your password" />
+                <button type="button"
+                        @onclick="TogglePasswordVisibility"
+                        class="password-toggle-btn"
+                        title="@(showPassword ? "Hide password" : "Show password")">
+                    <i class="bi @(showPassword ? "bi-eye-slash" : "bi-eye")"></i>
+                </button>
+            </div>
             @if (passwordError)
             {
                 <div class="error-message">
@@ -214,6 +452,7 @@
     </div>
 }
 
+
 @code {
     private LoginModel loginModel = new();
     private string message = string.Empty;
@@ -224,6 +463,7 @@
     private string usernameErrorMessage = "";
     private string passwordErrorMessage = "";
     private bool isLoading = false;
+    private bool showPassword = false;
 
     private bool showToast = false;
     private string toastClass = "";
@@ -243,6 +483,12 @@
     {
         loginModel.Password = e.Value?.ToString() ?? "";
         ValidatePassword();
+        StateHasChanged();
+    }
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
         StateHasChanged();
     }
 
