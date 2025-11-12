@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,7 +33,10 @@
             max-width: 380px;
             padding: 1.5rem;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            min-height: 450px;
+            height: 450px;
         }
+
         @@keyframes pulse {
             0%
 
@@ -51,22 +53,34 @@
         }
 
         }
+
+       
+        .password-toggle-btn::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
     </style>
 
-
+ 
     <link rel="preload" href="bootstrap/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="app.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="login.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="Testdotnet.styles.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" media="print" onload="this.onload=null;this.rel='stylesheet'">
+
+   
+    <link rel="stylesheet" href="app.css" media="all">
+    <link rel="stylesheet" href="login.css" media="all">
+    <link rel="stylesheet" href="Testdotnet.styles.css" media="all">
+
+  
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
 </head>
-
 <body>
+   
     <div id="app-loading">
         <div class="gradient-bg">
             <div class="glass-card">
