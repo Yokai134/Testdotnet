@@ -28,7 +28,7 @@ namespace Testdotnet.Services
                 var content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml");
                 content.Headers.Add("SOAPAction", "urn:ICUTech.Intf-IICUTech#Login");
 
-                // Логируем в консоль браузера
+
                 await _jsRuntime.InvokeVoidAsync("console.log", "=== SOAP REQUEST ===");
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Endpoint: {SoapEndpoint}");
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Username: '{username}'");
@@ -38,18 +38,18 @@ namespace Testdotnet.Services
                 var response = await _httpClient.PostAsync(SoapEndpoint, content);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                // Логируем ответ
+
                 await _jsRuntime.InvokeVoidAsync("console.log", "=== SOAP RESPONSE ===");
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Status Code: {response.StatusCode}");
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Response Length: {responseContent.Length} chars");
 
-                // Показываем первые 500 символов ответа
+
                 var preview = responseContent.Length > 500 ? responseContent.Substring(0, 500) + "..." : responseContent;
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Response Preview: {preview}");
 
                 var result = await _responseParser.ParseLoginResponse(responseContent);
 
-                // Логируем результат парсинга
+
                 await _jsRuntime.InvokeVoidAsync("console.log", "=== PARSING RESULT ===");
                 await _jsRuntime.InvokeVoidAsync("console.log", $"Success: {result.Success}");
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
