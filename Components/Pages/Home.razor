@@ -7,101 +7,105 @@
 
 <style>
     body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        height: 100vh !important;
-        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
+        background: #667eea;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     }
 
     html {
-        height: 100% !important;
-        overflow: hidden !important;
+        height: 100%;
+        overflow: hidden;
     }
 
     .gradient-bg {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        height: 100vh !important;
-        margin: 0 !important;
-        padding: 20px !important;
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important; /* Центрируем по вертикали */
-        justify-content: center !important; /* Центрируем по горизонтали */
-        overflow: hidden !important;
-        box-sizing: border-box !important;
+        background: inherit;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .glass-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
         width: 100%;
-        max-width: 400px;
-        min-width: 280px;
-        height: auto !important;
-        max-height: none !important;
-        min-height: auto !important;
-        overflow: visible !important;
+        max-width: 380px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
 
     .form-label {
-        padding-left: 16px;
+        padding-left: 12px;
         margin-bottom: 6px;
         font-weight: 600;
+        font-size: 0.9rem;
     }
 
     .modern-input {
         border: 1px solid #e1e5e9;
         background: #f8f9fa;
-        border-radius: 12px;
-        padding: 12px 16px;
-        transition: all 0.3s ease;
+        border-radius: 10px;
+        padding: 12px 14px;
         width: 100%;
         box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.2s ease;
     }
 
         .modern-input:focus {
             background: white;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.15);
+            outline: none;
         }
 
     .input-error {
-        border-color: #dc3545 !important;
-        background: #fff5f5 !important;
+        border-color: #dc3545;
+        background: #fff5f5;
     }
 
     .gradient-btn {
+        background: #667eea;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border: none;
-        border-radius: 12px;
-        padding: 12px;
+        border-radius: 10px;
+        padding: 14px;
         font-weight: 600;
-        transition: all 0.3s ease;
-        outline: none !important;
         width: 100%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
         .gradient-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
         }
 
         .gradient-btn:focus {
-            outline: none !important;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
         }
 
     .error-message {
         color: #dc3545;
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         margin-top: 0.25rem;
         display: flex;
         align-items: center;
         gap: 0.25rem;
-        padding-left: 16px;
+        padding-left: 12px;
     }
 
     .status-toast {
@@ -109,13 +113,13 @@
         top: 20px;
         right: 20px;
         background: white;
-        border-radius: 12px;
-        padding: 16px 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 14px 18px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         border-left: 4px solid;
-        max-width: 300px;
+        max-width: 280px;
         z-index: 1000;
-        animation: slideIn 0.3s ease;
+        animation: slideIn 0.25s ease;
     }
 
         .status-toast.success {
@@ -135,7 +139,7 @@
 
     @@keyframes slideIn {
         from {
-            transform: translateX(100%);
+            transform: translateX(120%);
             opacity: 0;
         }
 
@@ -145,25 +149,23 @@
         }
     }
 
-    /* Стили для кнопки показа пароля */
     .password-toggle-btn {
         position: absolute;
-        right: 12px;
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
         background: none;
         border: none;
         color: #667eea;
         cursor: pointer;
-        padding: 8px;
-        border-radius: 6px;
-        transition: all 0.2s ease;
+        padding: 6px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
         z-index: 10;
     }
 
         .password-toggle-btn:hover {
-            background: #f8f9fa;
-            color: #764ba2;
+            background: #f0f2f5;
         }
 
     .password-input-container {
@@ -172,119 +174,36 @@
     }
 
     .password-input {
-        padding-right: 50px !important;
+        padding-right: 44px;
         width: 100%;
     }
 
     .password-toggle-btn i {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
-    /* ИСПРАВЛЕНИЕ ДЛЯ ГОРИЗОНТАЛЬНОЙ ОРИЕНТАЦИИ */
-    @@media (max-height: 600px) and (orientation: landscape) {
+
+    @@media (max-height: 700px) and (orientation: landscape) {
         .gradient-bg {
-            padding: 10px !important;
-            align-items: center !important; /* ВОЗВРАЩАЕМ ЦЕНТРИРОВАНИЕ */
-            justify-content: center !important; /* ВОЗВРАЩАЕМ ЦЕНТРИРОВАНИЕ */
+            padding: 10px;
+            align-items: flex-start;
+            justify-content: center;
         }
 
         .glass-card {
-            margin: 0 !important; /* Убираем отступы */
-            padding: 15px !important;
-            transform: scale(0.9); /* Немного уменьшаем для красоты */
-            transform-origin: center; /* Масштабируем от центра */
-        }
-    }
-
-    /* Для экстремально низких экранов в ландшафте */
-    @@media (max-height: 400px) and (orientation: landscape) {
-        .gradient-bg {
-            padding: 5px !important;
-            align-items: center !important;
-            justify-content: center !important;
+            padding: 1rem;
+            max-width: 350px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
-        .glass-card {
-            padding: 10px !important;
-            border-radius: 12px;
-            transform: scale(0.8); /* Еще меньше для очень низких экранов */
-            transform-origin: center;
+        .text-center {
+            margin-bottom: 0.75rem !important;
         }
 
         h2 {
-            font-size: 1rem !important;
-            margin-bottom: 0.1rem !important;
-        }
-
-        p.text-muted {
-            display: none !important;
-        }
-
-        .mb-3, .mb-4 {
+            font-size: 1.2rem !important;
             margin-bottom: 0.3rem !important;
-        }
-
-        .modern-input {
-            padding: 6px 10px !important;
-            font-size: 13px !important;
-        }
-
-        .gradient-btn {
-            padding: 8px !important;
-            font-size: 0.8rem !important;
-        }
-
-        .form-label {
-            margin-bottom: 2px !important;
-            font-size: 0.8rem !important;
-        }
-
-        .error-message {
-            font-size: 0.7rem !important;
-            margin-top: 0.1rem !important;
-        }
-    }
-
-    @@media (max-height: 600px) and (orientation: portrait) {
-        .gradient-bg {
-            padding: 10px !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        .glass-card {
-            margin: 0 !important;
-            padding: 15px !important;
-            transform: scale(0.9);
-            transform-origin: center;
-        }
-    
-        .password-toggle-btn {
-            right: 8px !important; 
-            padding: 6px !important;
-        }
-
-            .password-toggle-btn i {
-                font-size: 1rem !important; 
-            }
-
-        .password-input {
-            padding-right: 40px !important; 
-        }
-
-        .gradient-btn {
-            padding: 10px !important;
-            font-size: 0.9rem !important;
-        }
-
-        .form-label {
-            margin-bottom: 4px !important;
-            font-size: 0.9rem !important;
-        }
-
-        h2 {
-            font-size: 1.3rem !important;
-            margin-bottom: 0.5rem !important;
         }
 
         p.text-muted {
@@ -292,52 +211,114 @@
             margin-bottom: 0 !important;
         }
 
-        .mb-3, .mb-4 {
-            margin-bottom: 0.5rem !important;
+        .mb-3 {
+            margin-bottom: 0.75rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem !important;
         }
 
         .modern-input {
-            padding: 8px 12px !important;
-            font-size: 14px !important;
+            padding: 10px 12px;
+            font-size: 14px;
         }
 
         .gradient-btn {
-            padding: 10px !important;
-            font-size: 0.9rem !important;
+            padding: 12px;
+            font-size: 0.9rem;
         }
 
         .form-label {
-            margin-bottom: 4px !important;
-            font-size: 0.9rem !important;
-        }
-    }
-
-
-    @@media (max-height: 400px) and (orientation: landscape) {
-        .gradient-bg {
-            padding: 5px !important;
-            align-items: center !important;
-            justify-content: center !important;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
         }
 
-        .glass-card {
-            padding: 10px !important;
-            border-radius: 12px;
-            transform: scale(0.8);
-            transform-origin: center;
-        }
- 
         .password-toggle-btn {
-            right: 6px !important;
-            padding: 4px !important;
+            right: 8px;
+            padding: 5px;
         }
 
             .password-toggle-btn i {
-                font-size: 0.9rem !important;
+                font-size: 1rem;
             }
 
         .password-input {
-            padding-right: 35px !important;
+            padding-right: 38px;
+        }
+    }
+
+    @@media (max-height: 500px) and (orientation: landscape) {
+        .gradient-bg {
+            padding: 5px;
+        }
+
+        .glass-card {
+            padding: 0.75rem;
+            max-width: 320px;
+            border-radius: 12px;
+        }
+
+        h2 {
+            font-size: 1.1rem !important;
+            margin-bottom: 0.2rem !important;
+        }
+
+        p.text-muted {
+            display: none;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 0.75rem !important;
+        }
+
+        .modern-input {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .gradient-btn {
+            padding: 10px;
+            font-size: 0.85rem;
+        }
+
+        .form-label {
+            margin-bottom: 3px;
+            font-size: 0.8rem;
+        }
+
+        .error-message {
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+        }
+
+        .password-toggle-btn {
+            right: 6px;
+            padding: 4px;
+        }
+
+            .password-toggle-btn i {
+                font-size: 0.9rem;
+            }
+
+        .password-input {
+            padding-right: 32px;
+        }
+    }
+
+    @@media (max-height: 400px) and (orientation: landscape) {
+        .gradient-bg {
+            padding: 2px;
+        }
+
+        .glass-card {
+            padding: 0.5rem;
+            max-width: 300px;
+            border-radius: 10px;
         }
 
         h2 {
@@ -345,32 +326,84 @@
             margin-bottom: 0.1rem !important;
         }
 
-        p.text-muted {
-            display: none !important;
+        .mb-3 {
+            margin-bottom: 0.4rem !important;
         }
 
-        .mb-3, .mb-4 {
-            margin-bottom: 0.3rem !important;
+        .mb-4 {
+            margin-bottom: 0.6rem !important;
         }
 
         .modern-input {
-            padding: 6px 10px !important;
-            font-size: 13px !important;
+            padding: 6px 8px;
+            font-size: 12px;
         }
 
         .gradient-btn {
-            padding: 8px !important;
-            font-size: 0.8rem !important;
+            padding: 8px;
+            font-size: 0.8rem;
         }
 
         .form-label {
-            margin-bottom: 2px !important;
-            font-size: 0.8rem !important;
+            margin-bottom: 2px;
+            font-size: 0.75rem;
+            padding-left: 8px;
         }
 
         .error-message {
-            font-size: 0.7rem !important;
-            margin-top: 0.1rem !important;
+            font-size: 0.7rem;
+            margin-top: 0.1rem;
+            padding-left: 8px;
+        }
+
+        .password-toggle-btn {
+            right: 5px;
+            padding: 3px;
+        }
+
+            .password-toggle-btn i {
+                font-size: 0.8rem;
+            }
+
+        .password-input {
+            padding-right: 28px;
+        }
+    }
+
+    @@media (max-height: 600px) and (orientation: portrait) {
+        .gradient-bg {
+            padding: 10px;
+            align-items: flex-start;
+        }
+
+        .glass-card {
+            padding: 1rem;
+            margin-top: 10px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .glass-card {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .gradient-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    @@media (prefers-reduced-motion: reduce) {
+        .modern-input,
+        .gradient-btn,
+        .status-toast {
+            transition: none;
+            animation: none;
         }
     }
 </style>
