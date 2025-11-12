@@ -1,0 +1,120 @@
+﻿@page "/"
+@using Testdotnet.Interface
+@using Testdotnet.Model;
+@rendermode InteractiveServer
+
+<PageTitle>Login</PageTitle>
+
+<div class="container-fluid vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <!-- Убрал form тег -->
+                    <div class="text-center mb-4">
+                        <h2 class="card-title fw-bold">Sign In</h2>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username</label>
+                        <input value="@loginModel.Username"
+                               @oninput="UpdateUsername"
+                               class="form-control form-control-lg"
+                               placeholder="Enter username" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Password</label>
+                        <input value="@loginModel.Password"
+                               @oninput="UpdatePassword"
+                               type="password"
+                               class="form-control form-control-lg"
+                               placeholder="Enter password" />
+                    </div>
+
+                    <button type="button" 
+                            @onclick="HandleLogin"
+                            class="btn btn-primary btn-lg w-100">
+                        Sign In
+                    </button>
+                 
+                    @if (!string.IsNullOrEmpty(message))
+                    {
+                        <div class="alert @alertClass mt-3 mb-0" role="alert">
+                            @message
+                        </div>
+                    }
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginModel loginModel = new();
+    private string message = string.Empty;
+    private string alertClass = "alert-success";
+
+    [Inject] private ISoapService SoapService { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+ 
+    }
+
+    private void UpdateUsername(ChangeEventArgs e)
+    {
+        loginModel.Username = e.Value?.ToString() ?? "";
+        StateHasChanged(); 
+    }
+
+    private void UpdatePassword(ChangeEventArgs e)
+    {
+        loginModel.Password = e.Value?.ToString() ?? "";
+        StateHasChanged(); 
+    }
+
+    private async Task HandleLogin()
+    {
+        Console.WriteLine("HandleLogin called!");
+  
+
+        if (string.IsNullOrWhiteSpace(loginModel.Username) || string.IsNullOrWhiteSpace(loginModel.Password))
+        {
+            message = "Please fill in all fields";
+            alertClass = "alert-danger";
+            StateHasChanged();
+            return;
+        }
+
+        message = "Processing login...";
+        alertClass = "alert-info";
+        StateHasChanged();
+
+        try
+        {
+            var result = await SoapService.LoginAsync(loginModel.Username, loginModel.Password);
+
+            if (result.Success)
+            {
+                alertClass = "alert-success";
+                message = "Login successful!";
+            }
+            else
+            {
+                alertClass = "alert-danger";
+                message = result.ErrorMessage ?? "Login failed. Please check your credentials.";
+            }
+        }
+        catch (Exception ex)
+        {
+            alertClass = "alert-danger";
+            message = $"Connection error: {ex.Message}";
+        }
+
+        StateHasChanged();
+       
+    }
+
+}
