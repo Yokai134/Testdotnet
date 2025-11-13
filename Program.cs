@@ -7,12 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ISoapService, SoapServices>();
 builder.Services.AddScoped<IResponseParser, XmlResponseParser>();
-
-builder.Services.AddResponseCompression();
 
 var app = builder.Build();
 
@@ -24,9 +21,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseResponseCompression();
-
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseAntiforgery();
 
