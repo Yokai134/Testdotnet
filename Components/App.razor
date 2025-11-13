@@ -68,16 +68,51 @@
 <body>
     <Routes/>
     <div class="gradient-bg">
-        <div class="glass-card text-center">
-            <div class="loading-spinner"></div>
-            <p style="margin-top: 10px; color: #666;">Loading application...</p>
+        <div class="glass-card shadow-lg p-4">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark mb-2">Welcome Back</h2>
+                <p class="text-muted">Sign in to your account</p>
+            </div>
+
+       
+            <div class="skeleton-loader">
+                <div class="skeleton-line" style="height: 40px; margin-bottom: 15px;"></div>
+                <div class="skeleton-line" style="height: 40px; margin-bottom: 15px;"></div>
+                <div class="skeleton-line" style="height: 45px; margin-bottom: 10px;"></div>
+            </div>
         </div>
     </div>
 
     <style>
-        @@keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .skeleton-loader {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-line {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            border-radius: 8px;
+            animation: shimmer 2s infinite;
+        }
+
+        @@keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        @@keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
     </style>
 
